@@ -104,17 +104,21 @@ function gameloop(){
 	ctx.fillStyle= "white";
 	ctx.font = "2em Verdana";
 	ctx.textAlign = "center";
-	var fulldate = new Date();
-	var date = fulldate.toLocaleDateString(navigator.language, {day:"numeric", month:"numeric", year:"numeric", hour:"numeric", minute:"numeric", second:"numeric"}).split(" ");
-	ctx.fillText(date[0], canvas.width/2, 200);
-	ctx.fillText(date[1], canvas.width/2, 250);
 	
+	var fulldate = new Date();
 	if(fulldate.getDate() == 1){
 		if(rand(0, 10) <= 9){
 			objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
 		}
 		ctx.font = "3em Verdana";
 		ctx.fillText("Feliz Ano Novo!", canvas.width/2, 100);
+		
+		ctx.font = "3em Verdana";
+		ctx.fillText(fulldate.getFullYear(), canvas.width/2, 150);
+	}else{
+		var date = fulldate.toLocaleDateString(navigator.language, {day:"numeric", month:"numeric", year:"numeric", hour:"numeric", minute:"numeric", second:"numeric"}).split(" ");
+		ctx.fillText(date[0], canvas.width/2, 200);
+		ctx.fillText(date[1], canvas.width/2, 250);
 	}
 	
 	setTimeout(gameloop, 1000 / 60);
