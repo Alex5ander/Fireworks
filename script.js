@@ -112,8 +112,6 @@ function gameloop(){
 		}
 		ctx.font = "3em Verdana";
 		ctx.fillText("Feliz Ano Novo!", canvas.width/2, 100);
-		
-		ctx.font = "3em Verdana";
 		ctx.fillText(fulldate.getFullYear(), canvas.width/2, 150);
 	}else{
 		var date = fulldate.toLocaleDateString(navigator.language, {day:"numeric", month:"numeric", year:"numeric", hour:"numeric", minute:"numeric", second:"numeric"}).split(" ");
