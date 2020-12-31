@@ -105,7 +105,7 @@ function gameloop(){
 	ctx.font = "2em Verdana";
 	ctx.textAlign = "center";
 	var fulldate = new Date();
-	var date = fulldate.toLocaleDateString("pr-br", {day:"numeric", month:"numeric", year:"numeric", hour:"numeric", minute:"numeric", second:"numeric"}).split(" ");
+	var date = fulldate.toLocaleDateString(navigator.language, {day:"numeric", month:"numeric", year:"numeric", hour:"numeric", minute:"numeric", second:"numeric"}).split(" ");
 	ctx.fillText(date[0], canvas.width/2, 200);
 	ctx.fillText(date[1], canvas.width/2, 250);
 	
