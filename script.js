@@ -109,7 +109,7 @@ function gameloop(){
 	ctx.fillText(date[0], canvas.width/2, 200);
 	ctx.fillText(date[1], canvas.width/2, 250);
 	
-	if(fulldate.getDate() == 31){
+	if(fulldate.getDate() == 1){
 		if(rand(0, 10) <= 9){
 			objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
 		}
