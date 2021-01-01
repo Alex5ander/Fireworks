@@ -110,6 +110,7 @@ function gameloop(){
 		if(rand(0, 10) <= 9){
 			objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
 		}
+		objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
 		ctx.font = "3em Verdana";
 		ctx.fillText("Feliz Ano Novo!", canvas.width/2, 100);
 		ctx.fillText(fulldate.getFullYear(), canvas.width/2, 150);
