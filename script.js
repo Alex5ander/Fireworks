@@ -42,7 +42,7 @@ class Particle{
 		
 		this.time -= .09;
 		
-		this.force = {x:0, y:0};
+		this.force = {x :0, y: 0};
 	}
 }
 
@@ -87,6 +87,8 @@ window.addEventListener("resize", function(e){
 	canvas.height = window.innerHeight;
 });
 
+let lastTime = 0;
+
 function gameloop(){
 	let start =+ new Date();
 	ctx.fillStyle = "rgba(0, 0, 0, .5)";
@@ -103,14 +105,14 @@ function gameloop(){
 	}
 	
 	if(rand(0, 10) <= 9){
-            objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
-        }
+    objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
+  }
 
 	objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
 	
-	let end =+ new Date();
-	let elapsedTime = end - start;
-	setTimeout(gameloop, (1000 / 60) - elapsedTime);
+	end = lastTime ? start - lastTime : 0;
+  lastTime = start;
+	setTimeout(gameloop, 1000 / 60 - end);
 }
 
 gameloop();
