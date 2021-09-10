@@ -110,9 +110,11 @@ function gameloop(){
 
 	objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
   
-  
+  ctx.fillStyle = "white";
+  ctx.font = "24px Arial";
+  ctx.fillText("FPS: "+ (1000 / (start - end)).toFixed(2), 10, 40);
 	end =+ new Date();
-  setTimeout(gameloop, 1000 / 60);
+  setTimeout(gameloop, 1000 / 60 - (start - end));
 }
 
 gameloop();
