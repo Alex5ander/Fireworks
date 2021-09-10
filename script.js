@@ -88,6 +88,7 @@ window.addEventListener("resize", function(e){
 });
 
 function gameloop(){
+	let start =+ new Date();
 	ctx.fillStyle = "rgba(0, 0, 0, .5)";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	
@@ -107,7 +108,9 @@ function gameloop(){
 
 	objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
 	
-	setTimeout(gameloop, 1000 / 60);
+	let end =+ new Date();
+	let elapsedTime = end - start;
+	setTimeout(gameloop, (1000 / 60) - elapsedTime);
 }
 
 gameloop();
