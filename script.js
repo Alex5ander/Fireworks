@@ -114,7 +114,7 @@ function gameloop(){
   ctx.font = "24px Arial";
   ctx.fillText("FPS: "+ (1000 / (start - end)).toFixed(2), 10, 40);
 	end =+ new Date();
-  setTimeout(gameloop, 1000 / 60 - (start - end));
+  setTimeout(gameloop, 1000 / 60);
 }
 
 gameloop();
