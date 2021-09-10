@@ -88,6 +88,7 @@ window.addEventListener("resize", function(e){
 });
 
 let lastTime = 0;
+let end = 0;
 
 function gameloop(){
 	let start =+ new Date();
