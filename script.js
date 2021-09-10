@@ -87,7 +87,6 @@ window.addEventListener("resize", function(e){
 	canvas.height = window.innerHeight;
 });
 
-let lastTime = 0;
 let end = 0;
 
 function gameloop(){
@@ -110,10 +109,12 @@ function gameloop(){
   }
 
 	objects.push(new Firework(rand(0, canvas.width), canvas.height, 3, {x:0, y:rand(-18, -canvas.height * .07)}));
-	
-	end = lastTime ? start - lastTime : 0;
-  lastTime = start;
-	setTimeout(gameloop, 1000 / 60 - end);
+  
+  ctx.fillStyle = "white";
+  ctx.font = "24px Arial";
+  ctx.fillText("FPS: "+ (1000 / (start - end)).toFixed(2), 10, 40);
+	end =+ new Date();
+  setTimeout(gameloop, 1000 / 60 - (start - end));
 }
 
 gameloop();
