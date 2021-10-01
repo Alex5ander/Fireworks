@@ -118,9 +118,6 @@ function gameloop() {
 
 	let fpsText = "FPS: " + fps.toFixed(2);
 
-	ctx.fillStyle = "lightblue";
-	ctx.fillRect(0, 20, 140, 24);
-
 	ctx.font = "24px Arial";
 	ctx.fillStyle = "white";
 	ctx.fillText("FPS: " + fps.toFixed(2), 8, 40);
