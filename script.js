@@ -115,12 +115,6 @@ function gameloop() {
 	let fps = 1000 / elapsedTime;
 
 	elapsedTime /= 1000;
-
-	let fpsText = "FPS: " + fps.toFixed(2);
-
-	ctx.font = "24px Arial";
-	ctx.fillStyle = "white";
-	ctx.fillText("FPS: " + fps.toFixed(2), 8, 40);
 	window.requestAnimationFrame(gameloop);
 }
 
