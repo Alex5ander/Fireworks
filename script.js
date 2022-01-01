@@ -69,6 +69,7 @@ class Particle {
 		this.vel = { x: 0, y: 0 };
 		this.force = force;
 		this.time = 1;
+		this.remove = false;
 	}
 	draw() {
 		this.vel.y += gravity;
@@ -81,15 +82,22 @@ class Particle {
 
 		this.force = { x: 0, y: 0 };
 		
+		ctx.save();
+		ctx.globalCompositeOperation = 'lighter';
+		
 		fillCircle(this.x, this.y, this.radius, this.time, this.color);
+		ctx.restore();
 	}
 	update() {
-		this.time -= 0.1;
+		this.time -= elapsedTime;
+		if(this.time <= 0 || this.x < 0 || this.x > width || this.y > height * 1.25) {
+			this.remove = true;
+		}
 	}
 }
 
 function randomParticles(x, y, color) {
-	for (let i = 0; i < 100; i++) {
+	for (let i = 0; i < 50; i++) {
 		objects.push(
 			new Particle(
 				x,
@@ -119,8 +127,8 @@ function squareParticles(x, y, color) {
 }
 
 function matrixParticles(x, y, color, m) {
-	let s = 10;
-	let length  = rand(2, 10);
+	let s =  10;
+	let length  = rand(4, 10);
 	
 	for (let i = 0; i < m.length; i++) {
 		for(let j = 0; j < m[i].length; j++) {
@@ -147,7 +155,6 @@ class Firework extends Particle {
 	}
 	update() {
 		if (this.vel.y >= 0) {
-			this.time = 0;
 			this.explode();
 		}
 	}
@@ -158,9 +165,10 @@ class Firework extends Particle {
 			squareParticles(this.x, this.y, this.color);
 		}else if(Math.random() > 0.6) {
 			matrixParticles(this.x, this.y, this.color, star);
-		}else if(Math.random() > 0.5) {
+		}else {
 			matrixParticles(this.x, this.y, this.color, currentNewYear);
 		}
+		this.remove = true;
 	}
 }
 
@@ -178,30 +186,34 @@ function resize() {
 	pixelRatio = window.devicePixelRatio || 1;
 }
 
-function runRenderLoop() {
-	ctx.fillStyle = "rgba(0, 0, 0, .4)";
-	ctx.fillRect(0, 0, width, height);
-	
-	let now = Date.now();
-	elapsedTime = now - lastTime;
-	lastTime = now;
-	elapsedTime /= 1000;
-	
-	if(lastTime !== 0) {
-		for (let i = 0; i < objects.length; i++) {
+let nextframe = 0;
+
+function runRenderLoop(now) {	
+	if(now > nextframe) {
+		elapsedTime = now - lastTime;
+		lastTime = now;
+		elapsedTime /= 1000;
+		
+		nextframe = now + elapsedTime;
+		
+		ctx.fillStyle = "rgba(0, 0, 0, .5)";
+		ctx.fillRect(0, 0, width, height);
+				
+		for (let i = objects.length -1; i > 0; i--) {
 			let o = objects[i];
 			o.draw();
 			o.update();
 			
-			if(o.time <= 0) {
+			if(o.remove) {
 				objects.splice(i, 1);
-				i--;
 			} 
 		}
 
-		if (rand(0, 10) > 3) {
+		if (rand(0, 10) > 2) {
 			objects.push(new Firework(rand(0, width), height, 3, { x: 0, y: rand(-height * .25, -height * .75) }));
 		}
+		
+		//fillText("FPS: "+(1 / elapsedTime).toFixed(2), 16, height - 16, "white");
 	}
 
 	window.requestAnimationFrame(runRenderLoop);
@@ -209,5 +221,5 @@ function runRenderLoop() {
 
 window.onload = function() {
 	resize();
-	runRenderLoop();
+	runRenderLoop(0);
 }
