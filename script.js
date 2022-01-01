@@ -8,7 +8,6 @@ let objects = [];
 let gravity = 9.8;
 let elapsedTime = 0;
 let lastTime = 0;
-let gradient = '';
 
 const star = [
 	[0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -175,15 +174,12 @@ function resize() {
 	canvas.height = height;
 	
 	gravity = height / 60;
-	gradient = ctx.createLinearGradient(0, 0, 0, width);
-	gradient.addColorStop(0.3, 'black');
-	gradient.addColorStop(1, 'darkblue');
 	
 	pixelRatio = window.devicePixelRatio || 1;
 }
 
 function runRenderLoop() {
-	ctx.fillStyle = gradient;
+	ctx.fillStyle = "rgba(0, 0, 0, .4)";
 	ctx.fillRect(0, 0, width, height);
 	
 	let now = Date.now();
