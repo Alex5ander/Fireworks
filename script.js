@@ -48,7 +48,7 @@ function fillCircle(x, y, radius, time, color) {
 	ctx.beginPath();
 	ctx.fillStyle = color;
 	ctx.globalAlpha = time;
-	ctx.arc(x, y, radius * pixelRatio, 0, 2 * Math.PI);
+	ctx.arc(x, y, radius / pixelRatio, 0, 2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
 	ctx.restore();
