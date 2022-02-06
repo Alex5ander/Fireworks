@@ -209,8 +209,8 @@ function runRenderLoop(now) {
 			} 
 		}
 
-		if (rand(0, 10) === 0) {
-			objects.push(new Firework(rand(0, width), height, 3, { x: 0, y: rand(-height * .25, -height * .75) }));
+		if (rand(0, 10) < 3) {
+			objects.push(new Firework(rand(0, width), height, 3, { x: 0, y: rand(-height * .25, -height) }));
 		}
 		
 		//fillText("FPS: "+(1 / elapsedTime).toFixed(2), 16, height - 16, "white");
