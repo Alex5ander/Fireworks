@@ -7,7 +7,7 @@ let pixelRatio = 1;
 let objects = [];
 let gravity = 9.8;
 let elapsedTime = 0;
-let lastTime = 0;
+let lastTime = Date.now();
 
 const star = [
 	[0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -186,35 +186,30 @@ function resize() {
 	pixelRatio = window.devicePixelRatio || 1;
 }
 
-let nextframe = 0;
-
 function runRenderLoop(now) {	
-	if(now > nextframe) {
-		elapsedTime = now - lastTime;
-		lastTime = now;
-		elapsedTime /= 1000;
-		
-		nextframe = now + elapsedTime;
-		
-		ctx.fillStyle = "rgba(0, 0, 0, .5)";
-		ctx.fillRect(0, 0, width, height);
-				
-		for (let i = objects.length -1; i > 0; i--) {
-			let o = objects[i];
-			o.draw();
-			o.update();
-			
-			if(o.remove) {
-				objects.splice(i, 1);
-			} 
-		}
+	
+	let now = Date.now();
+	
+	elapsedTime = (now - lastTime) / 1000;
 
-		if (rand(0, 10) < 3) {
-			objects.push(new Firework(rand(0, width), height, 3, { x: 0, y: rand(-height * .25, -height) }));
-		}
-		
-		//fillText("FPS: "+(1 / elapsedTime).toFixed(2), 16, height - 16, "white");
+	ctx.fillStyle = "rgba(0, 0, 0, .5)";
+	ctx.fillRect(0, 0, width, height);
+
+	for (let i = objects.length -1; i > 0; i--) {
+		let o = objects[i];
+		o.draw();
+		o.update();
+
+		if(o.remove) {
+			objects.splice(i, 1);
+		} 
 	}
+
+	if (rand(0, 10) < 3) {
+		objects.push(new Firework(rand(0, width), height, 3, { x: 0, y: rand(-height * .25, -height) }));
+	}
+	
+	lastTime = now;
 
 	window.requestAnimationFrame(runRenderLoop);
 }
