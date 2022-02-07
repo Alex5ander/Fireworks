@@ -191,6 +191,12 @@ function runRenderLoop(now) {
 	let now = Date.now();
 	
 	elapsedTime = (now - lastTime) / 1000;
+	
+	if(elapsedTime < 0.016) {
+	   elapsedTime = 0.016;
+	}else if(elapsedTime > 0.1) {
+ 	    elapsedTime = 0.1;
+	}
 
 	ctx.fillStyle = "rgba(0, 0, 0, .5)";
 	ctx.fillRect(0, 0, width, height);
