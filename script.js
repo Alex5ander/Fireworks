@@ -188,7 +188,7 @@ function resize() {
 
 function runRenderLoop(now) {	
 	
-	let now = Date.now();
+	var now = Date.now();
 	
 	elapsedTime = (now - lastTime) / 1000;
 	
