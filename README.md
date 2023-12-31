@@ -11,7 +11,7 @@
 <div align="center">
   <h3 >2023</h3>
   <img src="2023/example.png"/>
-  <a href='https://alex5ander.github.io/Fireworks/2023/dist/index.html'>Executar</a>
+  <a href='https://alex5ander.github.io/Fireworks/2023/dist/'>Executar</a>
 </div>
 
 <div align="center">
