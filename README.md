@@ -5,7 +5,7 @@
 <div align="center">
   <h3 >2024</h3>
   <img src="2024/example.png"/>
-  <a href='https://alex5ander.github.io/Fireworks/2024/dist/index.html'>Executar</a>
+  <a href='https://alex5ander.github.io/Fireworks/2024/dist/'>Executar</a>
 </div>
 
 <div align="center">
@@ -17,5 +17,5 @@
 <div align="center">
   <h3>2022</h3>
   <img src="2022/example.png"/>
-  <a href='https://alex5ander.github.io/Fireworks/2022/index.html'>Executar</a>
+  <a href='https://alex5ander.github.io/Fireworks/2022/'>Executar</a>
 </div>
