@@ -216,7 +216,7 @@ const firework = (position = new THREE.Vector3(0, 0, 0)) => {
   scene.add(mesh);
 };
 
-camera.position.z = 100;
+camera.position.z = 200;
 let last = Date.now();
 function loop() {
   render.render(scene, camera);
