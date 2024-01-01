@@ -1,5 +1,5 @@
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
