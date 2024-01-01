@@ -119,7 +119,7 @@ const explosion = (
   position = new THREE.Vector3(0, 0, 0),
   color = new THREE.Color()
 ) => {
-  const amount = Math.floor(Math.random() * 1000);
+  const amount = Math.floor(Math.random() * 100);
   const scale = 1;
 
   const mesh = new THREE.InstancedMesh(
