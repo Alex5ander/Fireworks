@@ -1,6 +1,6 @@
 <h1 align="center">Fireworks</h1>
 
-<h2 align="center">Simples animação de fogos de artifício feito com Javascript e Canvas HTML5.</h2>
+<h2 align="center">Animações de fogos de artifício feito com Javascript e Canvas HTML5.</h2>
 
 <div align="center">
  
