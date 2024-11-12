@@ -42,7 +42,7 @@ const hemisphereLight = new THREE.HemisphereLight(0x000044, 0x000000, 1);
 scene.add(directionalLight);
 scene.add(hemisphereLight);
 
-new FontLoader().load('Arvo_Regular.json', (font) => {
+new FontLoader().load('./Arvo_Regular.json', (font) => {
   const textGeometry = new TextGeometry('Feliz 2024', {
     font,
     size: 16,
