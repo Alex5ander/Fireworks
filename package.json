@@ -1,7 +1,7 @@
 {
-  "name": "dev_2024",
+  "name": "fireworks",
   "version": "1.0.0",
-  "description": "",
+  "description": "<h1 align=\"center\">Fireworks</h1>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,10 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "three": "^0.160.0"
-  },
   "devDependencies": {
-    "vite": "^5.0.10"
+    "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "fireworks": "file:",
+    "three": "^0.170.0"
   }
 }

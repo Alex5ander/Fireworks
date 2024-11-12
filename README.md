@@ -7,7 +7,7 @@
   
   <img width="1024" src="PREVIEW_2024.png"/>
 
-<a href='https://alex5ander.github.io/Fireworks/2024/'>Executar</a>
+<a href='https://alex5ander.github.io/Fireworks/dist/2024/'>Executar</a>
 
 </div>
 
@@ -16,7 +16,7 @@
 
   <img width="1024" src="PREVIEW_2023.png"/>
 
-<a href='https://alex5ander.github.io/Fireworks/2023/'>Executar</a>
+<a href='https://alex5ander.github.io/Fireworks/dist/2023/'>Executar</a>
 
 </div>
 
@@ -25,5 +25,5 @@
 
   <img width="1024" src="PREVIEW_2022.png"/>
   
-  <a href='https://alex5ander.github.io/Fireworks/2022/'>Executar</a>
+  <a href='https://alex5ander.github.io/Fireworks/dist/2022/'>Executar</a>
 </div>
