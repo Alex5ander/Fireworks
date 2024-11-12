@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { TextGeometry } from 'three/examples/jsm/Addons.js';
+import { FontLoader } from 'three/examples/jsm/Addons.js';
 
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
@@ -33,7 +33,7 @@ composite.addPass(bloomPass);
 render.toneMapping = THREE.CineonToneMapping;
 render.toneMappingExposure = 1.5;
 
-const controls = new OrbitControls(camera, render.domElement);
+new OrbitControls(camera, render.domElement);
 render.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(render.domElement);
 
@@ -42,17 +42,17 @@ const hemisphereLight = new THREE.HemisphereLight(0x000044, 0x000000, 1);
 scene.add(directionalLight);
 scene.add(hemisphereLight);
 
-const fontLoader = new FontLoader().load('Arvo_Regular.json', (font) => {
+new FontLoader().load('Arvo_Regular.json', (font) => {
   const textGeometry = new TextGeometry('Feliz 2024', {
     font,
     size: 16,
-    height: 1,
+    depth: 1,
     curveSegments: 12,
     bevelEnabled: false,
     bevelThickness: 2,
     bevelSize: 8,
     bevelOffset: 0,
-    bevelSegments: 5,
+    bevelSegments: 5
   });
   const textMaterial = new THREE.MeshStandardMaterial({
     color: 0xffffff,

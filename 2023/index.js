@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
@@ -20,7 +20,7 @@ directionalLight.position.y = 10;
 scene.add(hemisphereLight);
 scene.add(directionalLight);
 
-const render = new THREE.WebGL1Renderer();
+const render = new THREE.WebGLRenderer();
 render.setSize(width, height);
 render.setClearColor(0x000);
 
@@ -43,7 +43,7 @@ render.toneMappingExposure = 1.5;
 const gridHelper = new THREE.GridHelper(100, 100);
 scene.add(gridHelper);
 
-const controls = new OrbitControls(camera, render.domElement);
+new OrbitControls(camera, render.domElement);
 
 document.body.appendChild(render.domElement);
 
@@ -119,7 +119,7 @@ const happyHolidays = [
   ],
 ];
 
-function matrixParticles(x, y, color = nw, m) {
+function matrixParticles(color = nw, m) {
   let s = 2;
   let length = 0.1;
   let config = {
@@ -190,8 +190,6 @@ const explosion = (
   color = new THREE.Color()
 ) => {
   const offset = matrixParticles(
-    position.x,
-    position.y,
     color,
     [currentNewYear, happyHolidays, star, starX][Math.floor(Math.random() * 4)]
   );

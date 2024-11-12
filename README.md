@@ -3,6 +3,12 @@
 <h2 align="center">Simples animação de fogos de artifício feito com Javascript e Canvas HTML5.</h2>
 
 <div align="center">
+ 
+ <h3><a href='https://alex5ander.github.io/Fireworks/dist/'>Home</a></h3>
+
+</div>
+
+<div align="center">
   <h3 >2024</h3>
   
   <img width="1024" src="PREVIEW_2024.png"/>
