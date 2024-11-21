@@ -42,38 +42,39 @@ const hemisphereLight = new THREE.HemisphereLight(0x000044, 0x000000, 1);
 scene.add(directionalLight);
 scene.add(hemisphereLight);
 
-new FontLoader().load('./Arvo_Regular.json', (font) => {
-  const textGeometry = new TextGeometry('Feliz 2024', {
-    font,
-    size: 16,
-    depth: 1,
-    curveSegments: 12,
-    bevelEnabled: false,
-    bevelThickness: 2,
-    bevelSize: 8,
-    bevelOffset: 0,
-    bevelSegments: 5
-  });
-  const textMaterial = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    emissive: 0xff0000,
-  });
-  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+import font_json from './Arvo_Regular.json'
 
-  textGeometry.computeBoundingBox();
-  const centerOffset =
-    -0.5 * (textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x);
-  textMesh.position.x = centerOffset;
-  textMesh.userData.time = Date.now();
-  textMesh.userData.update = () => {
-    if (Date.now() - textMesh.userData.time > 300) {
-      const rand = () => Math.random();
-      textMesh.material.emissive.setRGB(rand(), rand(), rand());
-      textMesh.userData.time = Date.now();
-    }
-  };
-  scene.add(textMesh);
+const font = new FontLoader().parse(font_json);
+const textGeometry = new TextGeometry('Feliz 2024', {
+  font,
+  size: 16,
+  depth: 1,
+  curveSegments: 12,
+  bevelEnabled: false,
+  bevelThickness: 2,
+  bevelSize: 8,
+  bevelOffset: 0,
+  bevelSegments: 5
 });
+const textMaterial = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  emissive: 0xff0000,
+});
+const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+
+textGeometry.computeBoundingBox();
+const centerOffset =
+  -0.5 * (textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x);
+textMesh.position.x = centerOffset;
+textMesh.userData.time = Date.now();
+textMesh.userData.update = () => {
+  if (Date.now() - textMesh.userData.time > 300) {
+    const rand = () => Math.random();
+    textMesh.material.emissive.setRGB(rand(), rand(), rand());
+    textMesh.userData.time = Date.now();
+  }
+};
+scene.add(textMesh);
 
 const gravity = new THREE.Vector3(0, -0.09807, 0);
 
