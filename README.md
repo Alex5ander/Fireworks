@@ -11,7 +11,7 @@
 <div align="center">
   <h3 >2024</h3>
   
-  <img width="1024" src="PREVIEW_2024.png"/>
+  <img width="1024" src="./public/PREVIEW_2024.png"/>
 
 <a href='https://alex5ander.github.io/Fireworks/dist/2024/'>Executar</a>
 
@@ -20,7 +20,7 @@
 <div align="center">
   <h3 >2023</h3>
 
-  <img width="1024" src="PREVIEW_2023.png"/>
+  <img width="1024" src="./public/PREVIEW_2023.png"/>
 
 <a href='https://alex5ander.github.io/Fireworks/dist/2023/'>Executar</a>
 
@@ -29,7 +29,7 @@
 <div align="center">
   <h3>2022</h3>
 
-  <img width="1024" src="PREVIEW_2022.png"/>
+  <img width="1024" src="./public/PREVIEW_2022.png"/>
   
   <a href='https://alex5ander.github.io/Fireworks/dist/2022/'>Executar</a>
 </div>
