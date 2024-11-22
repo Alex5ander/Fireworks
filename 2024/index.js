@@ -2,10 +2,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { TextGeometry } from 'three/examples/jsm/Addons.js';
 import { FontLoader } from 'three/examples/jsm/Addons.js';
-
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import font_json from './Arvo_Regular.json'
 
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -13,14 +13,16 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   10000
 );
+
 const scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2(0xffffff, 0.001);
-const render = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.CineonToneMapping;
+renderer.toneMappingExposure = 1.5;
 
 const renderPass = new RenderPass(scene, camera);
-const composite = new EffectComposer(render);
-composite.addPass(renderPass);
-
+const composite = new EffectComposer(renderer);
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
   3,
@@ -28,53 +30,45 @@ const bloomPass = new UnrealBloomPass(
   0
 );
 
+composite.addPass(renderPass);
 composite.addPass(bloomPass);
 
-render.toneMapping = THREE.CineonToneMapping;
-render.toneMappingExposure = 1.5;
-
-new OrbitControls(camera, render.domElement);
-render.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(render.domElement);
-
+new OrbitControls(camera, renderer.domElement);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 const hemisphereLight = new THREE.HemisphereLight(0x000044, 0x000000, 1);
 scene.add(directionalLight);
 scene.add(hemisphereLight);
 
-import font_json from './Arvo_Regular.json'
+const createText = () => {
+  const font = new FontLoader().parse(font_json);
+  const geometry = new TextGeometry('Feliz 2024', {
+    font,
+    size: 16,
+    depth: 1,
+    curveSegments: 12,
+    bevelEnabled: false,
+    bevelThickness: 2,
+    bevelSize: 8,
+    bevelOffset: 0,
+    bevelSegments: 5
+  });
+  const material = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xff0000 });
+  const mesh = new THREE.Mesh(geometry, material);
+  geometry.computeBoundingBox();
+  const centerOffset =
+    -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+  mesh.position.x = centerOffset;
+  mesh.userData.time = Date.now();
+  mesh.userData.update = () => {
+    if (Date.now() - mesh.userData.time > 300) {
+      const rand = () => Math.random();
+      mesh.material.emissive.setRGB(rand(), rand(), rand());
+      mesh.userData.time = Date.now();
+    }
+  };
 
-const font = new FontLoader().parse(font_json);
-const textGeometry = new TextGeometry('Feliz 2024', {
-  font,
-  size: 16,
-  depth: 1,
-  curveSegments: 12,
-  bevelEnabled: false,
-  bevelThickness: 2,
-  bevelSize: 8,
-  bevelOffset: 0,
-  bevelSegments: 5
-});
-const textMaterial = new THREE.MeshStandardMaterial({
-  color: 0xffffff,
-  emissive: 0xff0000,
-});
-const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-
-textGeometry.computeBoundingBox();
-const centerOffset =
-  -0.5 * (textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x);
-textMesh.position.x = centerOffset;
-textMesh.userData.time = Date.now();
-textMesh.userData.update = () => {
-  if (Date.now() - textMesh.userData.time > 300) {
-    const rand = () => Math.random();
-    textMesh.material.emissive.setRGB(rand(), rand(), rand());
-    textMesh.userData.time = Date.now();
-  }
-};
-scene.add(textMesh);
+  scene.add(mesh);
+}
 
 const gravity = new THREE.Vector3(0, -0.09807, 0);
 
@@ -89,11 +83,7 @@ const createParticle = (
   color = new THREE.Color(0xffffff)
 ) => {
   const geometry = new THREE.SphereGeometry();
-  const material = new THREE.MeshPhongMaterial({
-    color,
-    emissive: color,
-    emissiveIntensity: 1.2,
-  });
+  const material = new THREE.MeshPhongMaterial({ color, emissive: color, emissiveIntensity: 2 });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(position.x, position.y, position.z);
 
@@ -120,16 +110,12 @@ const explosion = (
   position = new THREE.Vector3(0, 0, 0),
   color = new THREE.Color()
 ) => {
-  const amount = Math.floor(Math.random() * 100);
+  const amount = 50 + Math.floor(Math.random() * 100);
   const scale = 1;
 
   const mesh = new THREE.InstancedMesh(
     new THREE.SphereGeometry(Math.random() * 2),
-    new THREE.MeshPhongMaterial({
-      color,
-      emissive: color,
-      emissiveIntensity: Math.random() * 2,
-    }),
+    new THREE.MeshPhongMaterial({ color, emissive: color, emissiveIntensity: 1 + Math.random() * 2, }),
     amount
   );
 
@@ -180,11 +166,7 @@ const firework = (position = new THREE.Vector3(0, 0, 0)) => {
   const color = randomColor();
 
   const geometry = new THREE.ConeGeometry(1, 4);
-  const material = new THREE.MeshPhongMaterial({
-    color,
-    emissive: color,
-    emissiveIntensity: 1.2,
-  });
+  const material = new THREE.MeshPhongMaterial({ color, emissive: color, emissiveIntensity: 1.2 });
 
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(position.x, position.y, position.z);
@@ -219,21 +201,23 @@ const firework = (position = new THREE.Vector3(0, 0, 0)) => {
 
 camera.position.z = 200;
 let last = Date.now();
-function loop() {
-  render.render(scene, camera);
-  composite.render();
+
+createText();
+
+renderer.setAnimationLoop(() => {
   scene.children.forEach((e) => {
     if (e.userData.update) {
       e.userData.update();
     }
   });
 
+  renderer.render(scene, camera);
+  composite.render();
+
   if (Date.now() - last > 100) {
     firework(randomVector(200, 100));
     last = Date.now();
   }
+})
 
-  window.requestAnimationFrame(loop);
-}
-
-loop();
+document.body.appendChild(renderer.domElement);
