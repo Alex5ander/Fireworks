@@ -147,11 +147,6 @@ function matrixParticles(color = nw, m) {
   return config;
 }
 
-const randomColor = () => new THREE.Color(Math.random() * 0xffffffff);
-
-const randomVector = (max, min) =>
-  new THREE.Vector3(Math.random() * max - min, 0, Math.random() * max - min);
-
 const createParticle = (
   position = new THREE.Vector3(0, 0, 0),
   force = new THREE.Vector3(0, 0, 0),
@@ -244,9 +239,10 @@ const explosion = (
   scene.add(mesh);
 };
 
-const firework = (position = new THREE.Vector3(0, 0, 0)) => {
+const firework = () => {
+  const position = new THREE.Vector3().randomDirection().multiplyScalar(200);
   const force = new THREE.Vector3(0, 2 + Math.random() * 8, 0);
-  const color = randomColor();
+  const color = new THREE.Color(Math.random() * 0xffffff);
 
   const geometry = new THREE.ConeGeometry(1, 4);
   const material = new THREE.MeshPhongMaterial({
@@ -292,7 +288,7 @@ let last = new Date();
   composite.render();
 
   if (new Date() - last > 100) {
-    firework(randomVector(200, 100));
+    firework();
     last = new Date();
   }
 

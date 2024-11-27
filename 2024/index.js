@@ -72,11 +72,6 @@ const createText = () => {
 
 const gravity = new THREE.Vector3(0, -0.09807, 0);
 
-const randomColor = () => new THREE.Color(Math.random() * 0xffffffff);
-
-const randomVector = (max, min) =>
-  new THREE.Vector3(Math.random() * max - min, 0, Math.random() * max - min);
-
 const createParticle = (
   position = new THREE.Vector3(0, 0, 0),
   force = new THREE.Vector3(0, 0, 0),
@@ -94,7 +89,6 @@ const createParticle = (
   mesh.userData.update = () => {
     mesh.userData.velocity.add(gravity);
     mesh.position.add(mesh.userData.velocity);
-
     if (new Date() - mesh.userData.time > 1000) {
       scene.remove(mesh);
     }
@@ -161,9 +155,10 @@ const explosion = (
   scene.add(mesh);
 };
 
-const firework = (position = new THREE.Vector3(0, 0, 0)) => {
+const firework = () => {
+  const position = new THREE.Vector3().randomDirection().multiplyScalar(200);
   const force = new THREE.Vector3(0, 2 + Math.random() * 8, 0);
-  const color = randomColor();
+  const color = new THREE.Color(Math.random() * 0xffffff);
 
   const geometry = new THREE.ConeGeometry(1, 4);
   const material = new THREE.MeshPhongMaterial({ color, emissive: color, emissiveIntensity: 1.2 });
@@ -185,7 +180,7 @@ const firework = (position = new THREE.Vector3(0, 0, 0)) => {
           mesh.position.z
         ),
         new THREE.Vector3(Math.random(), 0, Math.random()),
-        new THREE.Vector3(0xfff)
+        color
       )
     );
 
@@ -215,7 +210,7 @@ renderer.setAnimationLoop(() => {
   composite.render();
 
   if (Date.now() - last > 100) {
-    firework(randomVector(200, 100));
+    firework();
     last = Date.now();
   }
 })
