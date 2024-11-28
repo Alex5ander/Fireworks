@@ -156,7 +156,7 @@ const createParticle = (
   const material = new THREE.MeshPhongMaterial({
     color,
     emissive: color,
-    emissiveIntensity: 1.2,
+    emissiveIntensity: 2,
   });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(position.x, position.y, position.z);
@@ -197,7 +197,7 @@ const explosion = (
     new THREE.MeshPhongMaterial({
       color,
       emissive: color,
-      emissiveIntensity: Math.random() * 2,
+      emissiveIntensity: 2,
     }),
     amount
   );
@@ -248,7 +248,7 @@ const firework = () => {
   const material = new THREE.MeshPhongMaterial({
     color,
     emissive: color,
-    emissiveIntensity: 1.2,
+    emissiveIntensity: 2,
   });
 
   const mesh = new THREE.Mesh(geometry, material);
@@ -267,8 +267,7 @@ const firework = () => {
           mesh.position.y - 2,
           mesh.position.z
         ),
-        new THREE.Vector3(Math.random(), 0, Math.random()),
-        new THREE.Vector3(0xfff)
+        new THREE.Vector3().randomDirection(), color
       )
     );
 
@@ -284,8 +283,6 @@ const firework = () => {
 
 let last = new Date();
 (function loop() {
-  render.render(scene, camera);
-  composite.render();
 
   if (new Date() - last > 100) {
     firework();
@@ -297,6 +294,9 @@ let last = new Date();
       e.userData.update();
     }
   });
+
+  render.render(scene, camera);
+  composite.render();
 
   window.requestAnimationFrame(loop);
 })();
