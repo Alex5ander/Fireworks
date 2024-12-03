@@ -206,13 +206,12 @@ renderer.setAnimationLoop(() => {
     }
   });
 
-  renderer.render(scene, camera);
-  composite.render();
-
   if (Date.now() - last > 100) {
     firework();
     last = Date.now();
   }
+
+  composite.render();
 })
 
 document.body.appendChild(renderer.domElement);

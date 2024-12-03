@@ -295,7 +295,6 @@ let last = new Date();
     }
   });
 
-  render.render(scene, camera);
   composite.render();
 
   window.requestAnimationFrame(loop);
