@@ -16,6 +16,7 @@ const camera = new THREE.PerspectiveCamera(
 
 const scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2(0xffffff, 0.001);
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.CineonToneMapping;
@@ -29,7 +30,6 @@ const bloomPass = new UnrealBloomPass(
   0,
   0
 );
-
 composite.addPass(renderPass);
 composite.addPass(bloomPass);
 

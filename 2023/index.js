@@ -23,22 +23,20 @@ scene.add(directionalLight);
 const render = new THREE.WebGLRenderer();
 render.setSize(width, height);
 render.setClearColor(0x000);
+render.toneMapping = THREE.CineonToneMapping;
+render.toneMappingExposure = 1.5;
 
 const renderPass = new RenderPass(scene, camera);
-const composite = new EffectComposer(render);
-composite.addPass(renderPass);
-
 const bloomPass = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  new THREE.Vector2(width, height),
   1.6,
   0.1,
   0.1
 );
 
+const composite = new EffectComposer(render);
+composite.addPass(renderPass);
 composite.addPass(bloomPass);
-
-render.toneMapping = THREE.CineonToneMapping;
-render.toneMappingExposure = 1.5;
 
 const gridHelper = new THREE.GridHelper(100, 100);
 scene.add(gridHelper);
